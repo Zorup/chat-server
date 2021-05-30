@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:mariadb://localhost:3306/test_chat
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: mariadb
+  jpa:
+    open-in-view: false # 성능저하 및 부작용 방지용
+    generate-ddl: true  # 앱 구동시 ddl create
+    show-sql: true
+#    아래 선언시 -> 구동시 ddl create, 종료시 ddl drop
+#    hibernate:
+#      ddl-auto:create
+
+server:
+  port: 8083
