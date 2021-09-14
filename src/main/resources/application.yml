@@ -1,16 +1,39 @@
+# 공통
+
+server:
+  port: 8083
+
 spring:
-  datasource:
-    url: jdbc:mariadb://localhost:3306/test_chat
-    driver-class-name: org.mariadb.jdbc.Driver
-    username: root
-    password: mariadb
+  profiles:
+    active: local   # 프로파일 지정 없으면 디폴트로 local 사용
   jpa:
     open-in-view: false # 성능저하 및 부작용 방지용
     generate-ddl: true  # 앱 구동시 ddl create
     show-sql: true
-#    아래 선언시 -> 구동시 ddl create, 종료시 ddl drop
-#    hibernate:
-#      ddl-auto:create
+  #    아래 선언시 -> 구동시 ddl create, 종료시 ddl drop
+  #    hibernate:
+  #      ddl-auto:create
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: mariadb
 
-server:
-  port: 8083
+---
+
+# 로컬 IDE기반 개발용 프로파일
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: jdbc:mariadb://localhost:3306/test_chat
+
+---
+
+## 로컬에서 도커로 띄워놓을때 사용하는 프로파일
+spring:
+  config:
+    activate:
+      on-profile: local-docker
+  datasource:
+    url: jdbc:mariadb://host.docker.internal:3306/test_chat
