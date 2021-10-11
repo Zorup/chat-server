@@ -39,9 +39,9 @@ public class ChatLogService {
         return result;
     }
 
-    public void insertChatLog(ChatLogDto chatLogDto){
+    public ChatLog insertChatLog(ChatLogDto chatLogDto){
 
         ChatLog chatLog = ChatLog.builder(chatLogDto).build();
-        log.info("inserted: " + chatLogRepo.save(chatLog));
+        return chatLogRepo.save(chatLog);
     }
 }

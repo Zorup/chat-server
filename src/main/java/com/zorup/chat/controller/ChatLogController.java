@@ -1,5 +1,6 @@
 package com.zorup.chat.controller;
 
+import com.zorup.chat.domain.ChatLog;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import java.util.List;
@@ -20,8 +21,8 @@ public class ChatLogController {
     }
 
     @PostMapping(value="/chat-log")
-    public void addChatLog(@RequestBody ChatLogDto chatLogDto){
-        chatLogService.insertChatLog(chatLogDto);
+    public ChatLog addChatLog(@RequestBody ChatLogDto chatLogDto){
+        return chatLogService.insertChatLog(chatLogDto);
     }
 
 }
