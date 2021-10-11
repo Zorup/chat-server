@@ -25,7 +25,7 @@ public class ChatController {
      */
     @MessageMapping("/send/{otherId}")
     public void call(ChatLogDto chatLogDto, @DestinationVariable("otherId") Long otherId){
-        chatLogService.insertChatLog(chatLogDto);
+        //chatLogService.insertChatLog(chatLogDto);
         template.convertAndSend("/topic/" + otherId, chatLogDto);
     }
 
