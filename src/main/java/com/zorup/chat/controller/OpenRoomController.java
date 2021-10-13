@@ -1,6 +1,7 @@
 package com.zorup.chat.controller;
 
 
+import com.zorup.chat.domain.OpenRoom;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import java.util.List;
@@ -22,8 +23,8 @@ public class OpenRoomController {
     }
 
     @PostMapping(value="/room")
-    public void addOpenRoom(@RequestBody OpenRoomDto openRoomDto){
-        openRoomService.insertOpenRoom(openRoomDto);
+    public OpenRoomDto addOpenRoom(@RequestBody OpenRoomDto openRoomDto){
+        return openRoomService.insertOpenRoom(openRoomDto);
     }
 
     @PutMapping(value="/room")

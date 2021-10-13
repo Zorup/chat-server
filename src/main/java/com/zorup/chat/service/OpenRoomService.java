@@ -41,10 +41,9 @@ public class OpenRoomService {
         return result;
     }
 
-    public void insertOpenRoom(OpenRoomDto openRoomDto){
-
+    public OpenRoomDto insertOpenRoom(OpenRoomDto openRoomDto){
         OpenRoom openRoom = OpenRoom.builder(openRoomDto).build();
-        log.info("inserted: " + openRoomRepo.save(openRoom));
+        return OpenRoomDto.builder(openRoomRepo.save(openRoom)).build();
     }
 
     public void updateOpenTime(OpenRoomDto openRoomDto){
