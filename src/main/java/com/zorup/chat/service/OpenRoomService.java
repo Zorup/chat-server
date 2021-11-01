@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.zorup.chat.repository.OpenRoomRepo;
 import com.zorup.chat.domain.OpenRoom;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,11 +16,12 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class OpenRoomService {
 
     private final OpenRoomRepo openRoomRepo;
 
-    public List<OpenRoomDto> EntitiesToDtos(List<OpenRoom> openRooms){
+    private List<OpenRoomDto> EntitiesToDtos(List<OpenRoom> openRooms){
 
         List<OpenRoomDto> result = new ArrayList<>();
         for(OpenRoom o : openRooms){
@@ -29,6 +31,7 @@ public class OpenRoomService {
         return result;
     }
 
+    @Transactional(readOnly = true)
     public List<OpenRoomDto> getOpenRooms(Long userId){
 
         List<OpenRoom> openRooms = openRoomRepo.findByOpenRoomIDUserIdOrderByModifiedDateDesc(userId);
@@ -44,6 +47,10 @@ public class OpenRoomService {
     public OpenRoomDto insertOpenRoom(OpenRoomDto openRoomDto){
         OpenRoom openRoom = OpenRoom.builder(openRoomDto).build();
         return OpenRoomDto.builder(openRoomRepo.save(openRoom)).build();
+    }
+
+    public void deleteOpenRoom(Long userId, String roomId){
+        openRoomRepo.deleteByOpenRoomIDRoomIdAndOpenRoomIDUserId(roomId, userId);
     }
 
     public void updateOpenTime(OpenRoomDto openRoomDto){
