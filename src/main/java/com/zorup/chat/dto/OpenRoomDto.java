@@ -14,7 +14,7 @@ public class OpenRoomDto {
     private String roomName;
     private String createdDate;
     private String modifiedDate;
-
+    private String senderName;
     public static OpenRoomDtoBuilder builder(OpenRoom openRoom){
 
         return OpenRoomDtoBuilder()

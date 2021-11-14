@@ -1,7 +1,5 @@
 package com.zorup.chat.controller;
 
-
-import com.zorup.chat.domain.OpenRoom;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import java.util.List;
@@ -29,7 +27,6 @@ public class OpenRoomController {
     }
 
     @DeleteMapping(value="/{userId}/room/{roomId}")
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteOpenRoom(@PathVariable("userId") Long userId, @PathVariable("roomId") String roomId){
         openRoomService.deleteOpenRoom(userId, roomId);
     }

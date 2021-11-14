@@ -46,6 +46,18 @@ public class OpenRoomService {
 
     public OpenRoomDto insertOpenRoom(OpenRoomDto openRoomDto){
         OpenRoom openRoom = OpenRoom.builder(openRoomDto).build();
+
+        //채팅방 생성시 다른 유저의 채팅방 생성
+        String[] useUsers = openRoomDto.getRoomId().split("-");
+        List<OpenRoom> newEntities = new ArrayList<>();
+        int userLength = useUsers.length;
+        for (int i = 1; i < userLength; i++) {
+            openRoomDto.setUserId(Long.parseLong(useUsers[i]));
+            openRoomDto.setRoomName(openRoomDto.getSenderName());
+            newEntities.add(OpenRoom.builder(openRoomDto).build());
+        }
+        openRoomRepo.saveAll(newEntities);
+
         return OpenRoomDto.builder(openRoomRepo.save(openRoom)).build();
     }
 
